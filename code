@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> result ( vector<int>& nums ){
+    int n = nums.size();
+    
+    int ecnt=0;
+    int ocnt=0;
+
+    for(int i=0; i<n; i++){
+        if(nums[i]%2==0){
+        ecnt++;
+        }
+        else{
+        ocnt++;
+        }
+    }
+
+    int cnt = 2* max(ecnt,ocnt);
+
+    vector<int> ans(cnt);
+
+    int even = 0;
+    int odd = 1;
+    
+    for(int i=0; i<n; i++){
+        if(nums[i]%2==0) {
+            ans[even]=nums[i];
+            even+=2;
+            }
+        else {
+            ans[odd] = nums[i];
+            odd+=2;
+            }
+    }
+
+    while(even<cnt){
+        ans[even]=0;
+        even+=2;
+    }
+
+    while(odd<cnt){
+        ans[odd]=1;
+        odd+=2;
+    }
+
+    return ans;
+}
+
+int main() {
+    int n;
+    cin>>n;
+    vector<int> nums(n);
+
+    for(int i=0; i<n; i++){
+        cin>>nums[i];
+    }
+
+    vector<int> ans = result(nums);
+
+    for(int i=0; i<ans.size(); i++){
+        cout<<ans[i]<< " ";
+    }
+    
+    return 0;
+}
